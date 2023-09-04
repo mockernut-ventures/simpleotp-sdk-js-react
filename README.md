@@ -37,28 +37,77 @@ Here's
    Now, you can use the `useSimpleOTP` hook in any of your components where you want to access the `ReactSimpleOTP` instance:
 
    ```jsx
-   import React from 'react';
-   import { useSimpleOTP } from '@simpleotp/react';
-
+   import React, { useState } from 'react';
+   import { useSimpleOTP } from './SimpleOTPProvider'; // Adjust the import path as needed
+   
    function AuthComponent() {
      const simpleOTPInstance = useSimpleOTP();
-
+   
      // Use simpleOTPInstance methods and properties as needed
      const isAuthenticated = simpleOTPInstance.isAuthenticatedRef();
      const user = simpleOTPInstance.getUserRef();
-
+   
+     const [authCode, setAuthCode] = useState('');
+     const [isSignIn, setIsSignIn] = useState(false);
+   
+     const handleSignIn = async () => {
+       try {
+         setIsSignIn(true); // Set the flag to indicate sign-in initiated
+         await simpleOTPInstance.signIn(); // Call signIn to send the authentication code via email
+       } catch (error) {
+         // Handle any errors that occur during sign-in
+         console.error('Sign-in error:', error);
+       }
+     };
+   
+     const handleAuthWithURLCode = async () => {
+       try {
+         const authResult = await simpleOTPInstance.authWithURLCode(authCode); // Complete authentication
+         if (authResult.code === 'OK') {
+           // Authentication successful
+           console.log('Authentication successful');
+         } else {
+           // Handle authentication failure
+           console.error('Authentication failed');
+         }
+       } catch (error) {
+         // Handle any errors that occur during authentication
+         console.error('Authentication error:', error);
+       }
+     };
+   
      // Render your component based on the authentication state
      return (
        <div>
          {isAuthenticated ? (
-           <p>Welcome, {user}</p>
+           <div>
+             <p>Welcome, {user}</p>
+             <button onClick={simpleOTPInstance.signOut}>Log Out</button>
+           </div>
          ) : (
-           <button onClick={simpleOTPInstance.authWithURLCode}>Log In</button>
+           <div>
+             {isSignIn ? (
+               <div>
+                 <p>Enter the authentication code sent to your email:</p>
+                 <input
+                   type="text"
+                   value={authCode}
+                   onChange={(e) => setAuthCode(e.target.value)}
+                 />
+                 <button onClick={handleAuthWithURLCode}>Submit</button>
+               </div>
+             ) : (
+               <div>
+                 <p>You are not authenticated.</p>
+                 <button onClick={handleSignIn}>Log In</button>
+               </div>
+             )}
+           </div>
          )}
        </div>
      );
    }
-
+   
    export default AuthComponent;
    ```
 
