@@ -16,11 +16,11 @@ Here's
 
    ```jsx
    import React from 'react';
-   import SimpleOTPProvider from './SimpleOTPProvider'; // Adjust the import path as needed
+   import SimpleOTPProvider from '@simpleotp/react';
 
    function App() {
      return (
-       <SimpleOTPProvider siteID="yourSiteID" apiURL="yourAPIURL">
+       <SimpleOTPProvider siteID="yourSiteID">
          {/* Your app's components go here */}
        </SimpleOTPProvider>
      );
@@ -37,7 +37,7 @@ Here's
 
    ```jsx
    import React from 'react';
-   import { useSimpleOTP } from './SimpleOTPProvider'; // Adjust the import path as needed
+   import { useSimpleOTP } from '@simpleotp/react';
 
    function AuthComponent() {
      const simpleOTPInstance = useSimpleOTP();
