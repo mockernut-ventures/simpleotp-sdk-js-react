@@ -35,7 +35,7 @@ Here's
 3. **Usage in Components**:
 
    Now, you can use the `useSimpleOTP` hook in any of your components where you want to access the `ReactSimpleOTP` instance:
-
+```jsx
 import React, { useState, useEffect } from 'react';
 import { useSimpleOTP } from './SimpleOTPProvider'; // Adjust the import path as needed
 
@@ -112,6 +112,7 @@ function AuthComponent() {
 }
 
 export default AuthComponent;
+```
 
 
    In this example, we're using the `simpleOTPInstance` obtained from `useSimpleOTP` to manage authentication-related logic and display content based on the user's authentication state.
