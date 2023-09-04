@@ -35,6 +35,7 @@ Here's
 3. **Usage in Components**:
 
    Now, you can use the `useSimpleOTP` hook in any of your components where you want to access the `ReactSimpleOTP` instance. Here's an example of how to use the sign-in flow, the auth flow, and the sign-out flow in different React components using Tailwind CSS for styling:
+
    
 SignIn:
 ```jsx
