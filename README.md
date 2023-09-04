@@ -19,7 +19,7 @@
 
    function App() {
      return (
-       <SimpleOTPProvider siteID="yourSiteID">
+       <SimpleOTPProvider siteID="yourSiteID - given to you after you sign up for a Simple OTP subscription and create a site">
          {/* Your app's components go here */}
        </SimpleOTPProvider>
      );
