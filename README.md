@@ -4,10 +4,11 @@ Here's
 
 1. **Installation**:
 
-   First, make sure you have the `@simpleotp/core` library installed in your project since the React Simple OTP plugin depends on it.
+   First, make sure you have the `@simpleotp/core` library installed in your project since the React Simple OTP plugin depends on it. Also make sure to install this plugin.
 
    ```bash
    npm install @simpleotp/core
+   npm install @simpleotp/react
    ```
 
 2. **Import and Setup**:
