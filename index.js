@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from 'react'
 import { AuthStatusCode, SimpleOTP } from '@simpleotp/core'
 
-const SIMPLEOTP_CONTEXT_KEY = 'simpleotp'
+const SimpleOTPContext = createContext()
 
 class ReactSimpleOTP extends SimpleOTP {
   constructor(siteID, apiURL = null) {
@@ -9,6 +9,15 @@ class ReactSimpleOTP extends SimpleOTP {
 
     this.userRef = React.createRef()
     this.isAuthenticatedRef = React.createRef(Boolean(this.userRef.current))
+  }
+
+  async auth(code) {
+    const resp = await super.auth(code)
+    if (resp.code === AuthStatusCode.OK.description) {
+      this.isAuthenticatedRef.current = true
+      this.userRef.current = this.getUser()
+    }
+    return resp
   }
 
   async authWithURLCode() {
@@ -48,7 +57,5 @@ export function SimpleOTPProvider({ siteID, apiURL, children }) {
     </SimpleOTPContext.Provider>
   )
 }
-
-const SimpleOTPContext = createContext()
 
 export default SimpleOTPProvider
