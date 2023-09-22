@@ -29,12 +29,12 @@ class ReactSimpleOTP extends SimpleOTP {
     return resp
   }
 
-  isAuthenticatedRef() {
-    return this.isAuthenticatedRef.current
+  getIsAuthenticatedRef() {
+    return this.isAuthenticatedRef
   }
 
   getUserRef() {
-    return this.userRef.current
+    return this.userRef
   }
 
   signOut() {

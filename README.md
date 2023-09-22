@@ -39,7 +39,7 @@ SignIn:
 ```jsx
 import React, { useContext, useState } from 'react';
 import { AuthStatusCode, SignInStatusCode } from '@simpleotp/core';
-import { useSimpleOTP } from '@simpleotp/react'; // Update the import path
+import { useSimpleOTP } from '@simpleotp/react';
 import { useHistory } from 'react-router-dom';
 
 function SignIn({ email }) {
@@ -62,7 +62,7 @@ function SignIn({ email }) {
     }
   };
 
-  if (simpleOTP.isAuthenticatedRef()) {
+  if (simpleOTP.isAuthenticatedRef().current) {
     history.push('/');
     return null;
   }
@@ -178,14 +178,14 @@ export default Authentication;
 SignOut:
 ```jsx
 import React from 'react';
-import { useSimpleOTP } from './SimpleOTPProvider'; // Update the import path
+import { useSimpleOTP } from '@simpleotp/react';
 import { useHistory } from 'react-router-dom';
 
 function AuthButton() {
   const history = useHistory();
   const simpleOTP = useSimpleOTP();
 
-  const isAuthenticated = simpleOTP.isAuthenticatedRef();
+  const isAuthenticated = simpleOTP.isAuthenticatedRef().current;
 
   const signIn = () => {
     history.push('/sign-in');
